@@ -4,6 +4,22 @@
 # Log file
 *.log
 
+# Mac
+.DS_Store
+
+# Eclipse
+bin/
+.settings/
+.classpath
+
+# Intellij
+/.idea/
+*.iml
+
+# Maven
+log/
+target/
+
 # BlueJ files
 *.ctxt
 
