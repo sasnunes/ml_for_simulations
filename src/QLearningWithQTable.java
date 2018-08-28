@@ -1,3 +1,5 @@
+import simulator.HospitalSimulation;
+
 import java.util.List;
 import java.util.Random;
 
@@ -22,12 +24,12 @@ public class QLearningWithQTable {
         System.out.printf("State count is: %d%n", STATE_COUNT);
         System.out.printf("Building initial Q-Table%n");
         double[][] qtable = buildInitialQTable(STATE_COUNT, ACTIONS.size());
-        //printQTable(qtable, true);
+        printQTable(qtable, true);
 
         for (int i = 0; i < TRAINING_CYCLES; i++) {
             System.out.printf("%n===== Training-Cycle %d =====%n", i + 1);
             train(qtable);
-            //printQTable(qtable, true);
+            printQTable(qtable, true);
         }
 
         // show results. when EPSILON is 0, we will always exploit, choosing the most rewarding action on each state.

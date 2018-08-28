@@ -1,39 +1,42 @@
+import simulator.HospitalSimulation;
+
 import java.util.*;
 
 /**
- * This class implements an algorithm based on genetic-algroithms.
+ * This class implements an algorithm based on genetic-algorithms.
  * Generations mutate randomly and follow no concrete pattern.
  * Comparing the generation with the "fittest" results and their respective random mutation it determines the best
  * strategy for the given number of training cycles.
- * This algorithm resembles the most simple and unperformant solution and serves to compare performance and results
+ * This algorithm resembles the most simple and ineffective solution and serves to compare performance and results
  * to more clever approaches.
  */
 public class SimplestGeneticAlgorithm {
 
-    private static HospitalSimulation sim = new HospitalSimulation(3, "");
-    private static int TRAINING_CYCLES = 10;
+    private static HospitalSimulation sim = new HospitalSimulation(4, "");
+    private static int TRAINING_CYCLES = 100;
     private static int bestFitness = Integer.MIN_VALUE;
     private static List<Integer> bestGeneration = null;
     private static List<Integer> newGeneration;
     private static int correctionSteps = 0;
     private static int foundAt = 0;
+    private static boolean printAllGenerations = true;
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
         for (int i = 0; i < TRAINING_CYCLES; i++) {
             train(i);
 
-            if (i == TRAINING_CYCLES - 1 || true) {
+            if (printAllGenerations || i == TRAINING_CYCLES - 1) {
                 printInfo(newGeneration, bestGeneration, bestFitness, i + 1);
             }
         }
-        System.out.printf("Best Generation found after %d Iterations%nTotal time: %d milliseconds%n",
+        System.out.printf("Best Generation was found after %d iterations%nTotal time: %d milliseconds%n",
                 foundAt, System.currentTimeMillis() - start);
 
     }
 
     private static void train(int i) {
-        sim = new HospitalSimulation(3, "");
+        sim = new HospitalSimulation(4, "");
         if (bestGeneration == null) {
             newGeneration = getRandomStrategy(sim.numberOfPeriods);
         } else {
